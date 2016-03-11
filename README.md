@@ -17,7 +17,7 @@
     - COMPONENT_APP_SECRET = '0c79eferferfeferf0cc0be99b20a18faeb'
     - COMPONENT_APP_TOKEN = 'srgewgegerferf'
     - COMPONENT_ENCODINGAESKEY = 'bz5LSXhcaIBIBKJWZpk2tRl4fiBVbfPN5VlYgwXKTwp'
-    - AUTH_REDIRECT_URI = 'http://www.somewebsite.com/wechat'
+    - AUTH_REDIRECT_URI = 'http://www.somewebsite.cn/wechat'
 
 3. 初始化Django项目
     - python manage.py makemigrations
@@ -26,11 +26,11 @@
     - sudo python manage.py runserver 0.0.0.0:80
 
 4. 打开浏览器测试一下
-    - 打开http://www.zhaowentao.cn/wechat/auth，获得预授权链接
+    - 打开http://www.somewebsite.cn/wechat/auth，获得预授权链接
     - 点击预授权链接，页面跳转到微信授权页面
     - 用微信扫描页面上的二维码
     - 在手机上选择要授权的公众号
-    - 授权成功，浏览器跳转到http://www.somewebsite.com/wechat
+    - 授权成功，浏览器跳转到http://www.somewebsite.cn/wechat
     - 授权过程完成
 
 5. 开始写自己的逻辑
