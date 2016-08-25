@@ -153,8 +153,8 @@ AUTH_URL = (
     "?component_appid={component_appid}&pre_auth_code="
     "{pre_auth_code}&redirect_uri={redirect_uri}"
 )
-# 授权成功之后返回链接
-AUTH_REDIRECT_URI = 'http://www.somewebsite.com/wechat/authorized'
+# 授权成功之后返回链接。此链接应该调用 /wechat/authorized/ API。
+AUTH_REDIRECT_URI = 'http://www.somewebsite.com/wechat/authorized_successful'
 # 开放平台发布前测试
 TEST_APPID = 'wx570bc396a51b8ff8'
 
