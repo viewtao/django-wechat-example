@@ -33,6 +33,7 @@ class Wechat(models.Model):
     funcscope_categories = models.CommaSeparatedIntegerField(
         '权限集', max_length=64)
     join_time = models.DateTimeField('授权时间', auto_now_add=True)
+    objects = managers.WechatManager()
 
     class Meta:
         get_latest_by = 'join_time'

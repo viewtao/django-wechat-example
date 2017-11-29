@@ -25,3 +25,5 @@ VERIFY_TYPE_BASE_VERIFY = 3
 VERIFY_TYPE_3_1 = 4
 # 已资质认证通过、还未通过名称认证，但通过了腾讯微博认证
 VERIFY_TYPE_3_2 = 5
+
+MESSAGE_TYPES = ['text'] 

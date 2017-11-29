@@ -113,7 +113,18 @@ class ProcessServerEventView(APIView):
         message = self.preprocess_message(request)
         # 发布应用时，被开放平台调用
         if appid == settings.TEST_APPID:
-            return self.test(request, message, wechat)
+            # return self.test(request, message, wechat)
+            if message.get('MsgType').lower() == 'event':
+                return self.process_event(message, wechat)
+            elif message.get('MsgType').lower() in consts.MESSAGE_TYPES:
+                # 保存消息到数据库
+                message_obj = self.save_message(message, wechat)
+                # 默认的消息回应
+                reply_content = '欢迎！请您稍等，马上给您安排服务人员。'
+                return self.reply_message(message_obj, reply_content)
+            else:
+                return HttpResponse('')
+            
         # 发布以后
         else:
             if message.get('MsgType').lower() == 'event':
@@ -126,6 +137,12 @@ class ProcessServerEventView(APIView):
                 return self.reply_message(message_obj, reply_content)
             else:
                 return HttpResponse('')
+
+    def process_event(self, message, wechat):
+        return HttpResponse('')
+
+    def save_message(self, message, wechat):
+        return message
 
     def test(self, request, message, wechat):
         """
@@ -164,8 +181,8 @@ class ProcessServerEventView(APIView):
         回复公众号消息
         """
         reply = TextReply()
-        reply.target = message.FromUserName
-        reply.source = message.ToUserName
+        reply.target = message['FromUserName']
+        reply.source = message['ToUserName']
         reply.content = content
         xml_str = reply.render()
         headers = {'CONTENT_TYPE': self.request.META['CONTENT_TYPE']}
@@ -210,9 +227,9 @@ class WechatAuthSuccessPageView(APIView):
     授权成功时回调视图
     """
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         logger = getLogger('django.request.WechatAuthSuccessPageView')
-        auth_code = request.data['auth_code']
+        auth_code = request.query_params['auth_code']
         component = get_component()
         # 拿到授权公众号的信息
         result = component.query_auth(auth_code)

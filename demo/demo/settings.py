@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from __future__ import unicode_literals
 """
 Django settings for demo project.
@@ -154,7 +155,7 @@ AUTH_URL = (
     "{pre_auth_code}&redirect_uri={redirect_uri}"
 )
 # 授权成功之后返回链接。此链接应该调用 /wechat/authorized/ API。
-AUTH_REDIRECT_URI = 'http://www.somewebsite.com/wechat/authorized_successful'
+AUTH_REDIRECT_URI = 'http://www.somewebsite.com/wechat/authorized'
 # 开放平台发布前测试
 TEST_APPID = 'wx570bc396a51b8ff8'
 
